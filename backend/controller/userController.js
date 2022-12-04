@@ -19,7 +19,7 @@ const getMe = asyncHandler( async (req, res) => { //using protect gives the id a
     })
 })
 
-// @desc Register User
+// @desc Register User/////
 // @route Post /api/users
 // @access Public
 const registerUser = asyncHandler( async (req, res) => {
