@@ -26,6 +26,9 @@ BACKEND
                 userModel - new file - add user email password variables
                     Model - add userModel into with the goal
                 authMiddleware - new file - protect function which needs a token in order to pass otherwise no data
+    Idea of project
+        Each account had a name, email, password
+            Based on each account and their token, they have their own set of goals
                     
 */
 const express = require('express')

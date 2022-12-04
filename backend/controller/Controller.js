@@ -16,7 +16,7 @@ const setGoal = asyncHandler(async (req, res) => {
 
     const a = await Goal.create({ //step 8 setting up connection with mongo to take in from it and output from it
         text: req.body.text,
-        user: req.user.id
+        user: req.user.id //need this user path i guess
     })
 
     res.status(200).json({a})
