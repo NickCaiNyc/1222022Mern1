@@ -3,18 +3,15 @@ const mongoose = require('mongoose')
 
 const goalSchema = mongoose.Schema(
     {
+        user: {//setp one added this to the model 
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'User'
+        },
         text: {
             type:String,
             required: [true, 'Please add a text value'],
-        },  
-        username:{
-            type:String,
-            required: [true, 'Please add a text value'],
         },
-        email:{
-            type:String,
-            required: [true, 'Please add a text value'],
-        }
     },
     {
         timestamps : true,

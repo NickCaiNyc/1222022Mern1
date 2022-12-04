@@ -15,20 +15,18 @@ const setGoal = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Please add Goal') //errorMiddle.js
     }
-    if(!req.body.username){
-        res.status(400)
-        throw new Error('Please add username') //errorMiddle.js
-    }
-    if(!req.body.email){
-        res.status(400)
-        throw new Error('Please add new text field') //errorMiddle.js
-    }
-    
-
+    // if(!req.body.username){
+    //     res.status(400)
+    //     throw new Error('Please add username') //errorMiddle.js
+    // }
+    // if(!req.body.email){
+    //     res.status(400)
+    //     throw new Error('Please add new text field') //errorMiddle.js
+    // }
     const a = await Goal.create({ //step 8 setting up connection with mongo to take in from it and output from it
         text: req.body.text,
-        username: req.body.username,
-        email: req.body.email,
+        // username: req.body.username,
+        // email: req.body.email,
     })
 
     res.status(200).json({a})
