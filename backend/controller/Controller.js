@@ -1,4 +1,6 @@
 const Goal = require('../model/Model')
+//new
+const User = require('../model/userModel')
 
 const asyncHandler = require('express-async-handler')
 //functions to get goals
@@ -28,6 +30,25 @@ const updateGoal = asyncHandler(async(req, res) => {
         res.status(400)
         throw new Error('Please add new text field on postman')
     }
+
+
+    const user = await User.findById(req.user.id)
+    //BASIC IDEA
+    //If user is logged into as A and want to change goal of B cant, need the token of A and the id of 
+    //A goal not B goal
+
+    //check for user
+    if(!user){
+        res.status(401)
+        throw new Error('User not found')
+    }
+    //make sure the logged in user matches the goal user
+    if(goal.user.toString() !== user.id) {
+        res.status(401)
+        throw new Error('User not authorizeed to edit')
+    }
+
+
     const updateGoals = await Goal.findByIdAndUpdate(req.params.id, req.body)
     res.status(200).json({updateGoals})
 })
@@ -39,7 +60,23 @@ const deleteGoal = asyncHandler(async(req, res) =>{
         res.status(400)
         throw new Error('Please add new text field on postman')
     }
-    const deletedgoal = await Goal.findByIdAndRemove(req.params.id)
+    
+
+    //step 6 make sure that one user can't edit someone else's goals
+    const user = await User.findById(req.user.id)
+    //check for user
+    if(!user){
+        res.status(401)
+        throw new Error('User not found')
+    }
+    //make sure the logged in user matches the goal user
+    if(goal.user.toString() !== user.id) {
+        res.status(401)
+        throw new Error('User not authorizeed to delete')
+    }
+
+
+const deletedgoal = await Goal.findByIdAndRemove(req.params.id)
     res.status(200).json({deletedgoal})
 })
 
