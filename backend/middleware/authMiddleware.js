@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken') //token string which is very long and can be accessed through postman
 const asyncHandler = require('express-async-handler')
 const User = require('../model/userModel')
-
+//userController.js 
 
 //checking header, see if bearer , assigning token, verifying, getting user from token, next
 //uses next since middle ware, basically checking to token

@@ -10,9 +10,13 @@ const bcrypt = require('bcryptjs')
 // @route Get /api/users/me
 // @access private
 // Step 4 Protect route --> authMiddleware.js
-const getMe =asyncHandler( async (req, res) => {
-    
-    res.json({message : 'user info'})
+const getMe = asyncHandler( async (req, res) => { //using protect gives the id as a pass through Step 4
+    const {_id, name, email} = await User.findById(req.user.id)
+    res.status(200).json({
+        id:_id,
+        name, 
+        email
+    })
 })
 
 // @desc Register User
@@ -74,7 +78,7 @@ const loginUser = asyncHandler( async (req, res) => {
         throw new Error('Invalid Crediantials');
     }
     res.json({message: 'Log in User'})
-})
+})//gets email and password from body  findOne email from User
 
 //GENERATE TOKEN STEP 3
 
